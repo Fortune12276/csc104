@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        input, select, button {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        <input type="number" id="inputValue" placeholder="Enter temperature">
+        <select id="inputUnit">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+            <option value="K">Kelvin</option>
+        </select>
+        <button onclick="convertTemperature()">Convert</button>
+        <h3>Converted Temperatures</h3>
+        <p id="celsiusOutput">Celsius: </p>
+        <p id="fahrenheitOutput">Fahrenheit: </p>
+        <p id="kelvinOutput">Kelvin: </p>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            var inputValue = parseFloat(document.getElementById('inputValue').value);
+            var inputUnit = document.getElementById('inputUnit').value;
+
+            if (isNaN(inputValue)) {
+                alert("Please enter a valid number");
+                return;
+            }
+
+            var celsius, fahrenheit, kelvin;
+
+            switch (inputUnit) {
+                case 'C':
+                    celsius = inputValue;
+                    fahrenheit = (celsius * 9/5) + 32;
+                    kelvin = celsius + 273.15;
+                    break;
+                case 'F':
+                    fahrenheit = inputValue;
+                    celsius = (fahrenheit - 32) * 5/9;
+                    kelvin = celsius + 273.15;
+                    break;
+                case 'K':
+                    kelvin = inputValue;
+                    celsius = kelvin - 273.15;
+                    fahrenheit = (celsius * 9/5) + 32;
+                    break;
+                default:
+                    alert("Unknown unit");
+                    return;
+            }
+
+            document.getElementById('celsiusOutput').innerText = 'Celsius: ' + celsius.toFixed(2);
+            document.getElementById('fahrenheitOutput').innerText = 'Fahrenheit: ' + fahrenheit.toFixed(2);
+            document.getElementById('kelvinOutput').innerText = 'Kelvin: ' + kelvin.toFixed(2);
+        }
+    </script>
+</body>
+</html>
+
